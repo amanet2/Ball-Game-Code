@@ -1,7 +1,7 @@
 package game;
 import engine.session;
 
-public class logicAdapter implements logic {
+public class adapter implements logic {
     private int ticks;
     private long nextsecondnanos;
     private int tickReport;
@@ -11,7 +11,7 @@ public class logicAdapter implements logic {
         parentSession = instance;
     }
 
-    public logicAdapter() {
+    public adapter() {
         ticks = 0;
         nextsecondnanos = 0;
         tickReport = 0;

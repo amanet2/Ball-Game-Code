@@ -1,7 +1,7 @@
 package things;
 
-public class gItem {
-    public gItem() {
+public class item {
+    public item() {
 
     }
     public void test() {

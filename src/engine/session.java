@@ -1,7 +1,7 @@
 package engine;
 
 import game.logic;
-import game.logicAdapter;
+import game.adapter;
 
 public class session extends Thread implements Runnable {
     private final logic gameLogic;
@@ -12,7 +12,7 @@ public class session extends Thread implements Runnable {
         gameLogic = logic;
         tickRate = rate;
         playing = true;
-        ((logicAdapter) logic).setParentSession(this);
+        ((adapter) logic).setParentSession(this);
         start();
     }
 

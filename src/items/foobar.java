@@ -1,8 +1,8 @@
 package items;
 
-import things.gItem;
+import things.item;
 
-public class gItemFoobar extends gItem {
+public class foobar extends item {
     public void test() {
         super.testString("ITEM_FOOBAR");
     }
