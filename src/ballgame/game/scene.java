@@ -1,6 +1,6 @@
-package game;
-import things.item;
-import things.player;
+package ballgame.game;
+import ballgame.things.item;
+import ballgame.things.player;
 
 public class scene {
     int MAX_ITEMS = 128;

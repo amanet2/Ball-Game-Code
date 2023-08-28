@@ -1,7 +1,7 @@
-package engine;
+package ballgame.engine;
 
-import game.logic;
-import game.adapter;
+import ballgame.game.logic;
+import ballgame.game.adapter;
 
 public class session extends Thread implements Runnable {
     private final logic gameLogic;

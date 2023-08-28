@@ -1,5 +1,5 @@
-package game;
-import engine.session;
+package ballgame.game;
+import ballgame.engine.session;
 
 public class adapter implements logic {
     private int ticks;

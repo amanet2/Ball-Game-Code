@@ -1,4 +1,4 @@
-package things;
+package ballgame.things;
 
 public class item {
     public item() {

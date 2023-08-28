@@ -1,6 +1,6 @@
-package items;
+package ballgame.items;
 
-import things.item;
+import ballgame.things.item;
 
 public class foobar extends item {
     public void test() {

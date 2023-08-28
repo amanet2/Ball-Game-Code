@@ -1,4 +1,4 @@
-package game;
+package ballgame.game;
 
 public interface logic {
     void init();
