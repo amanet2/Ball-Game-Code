@@ -13,11 +13,10 @@ public class shell extends adapter {
     public void init() {
         super.init();
         contents = new JLayeredPane();
-        createFrame(Globals.viddefs.width, Globals.viddefs.height);
+        createFrame(Globals.viddefs.x, Globals.viddefs.y, Globals.viddefs.width, Globals.viddefs.height);
     }
 
-    public void createFrame(int w, int h) {
-        System.out.println(w + "," + h);
+    public void createFrame(int x, int y, int w, int h) {
         if(frame != null)
             frame.dispose();
         frame = new JFrame("BALL_GAME_" + this);
@@ -27,7 +26,10 @@ public class shell extends adapter {
         contents.setPreferredSize(new Dimension(w, h));
         frame.setContentPane(contents);
         frame.pack();
-        frame.setLocationRelativeTo(null);
+        if(x < 0 || y < 0)
+            frame.setLocationRelativeTo(null);
+        else
+            frame.setLocation(x, y);
         frame.setVisible(true);
 //        frame.setFocusTraversalKeysEnabled(false);
     }

@@ -7,7 +7,6 @@ import ballgame.engine.shell;
 
 import static ballgame.Globals.viddefs;
 
-
 public class BallGame {
     public static void main(String[] launchArgs) {
         item test = new item();
@@ -17,6 +16,8 @@ public class BallGame {
             i.test();
         }
 
+        viddefs.x = 0;
+        viddefs.y = 0;
         viddefs.width = 1280;
         viddefs.height = 720;
 

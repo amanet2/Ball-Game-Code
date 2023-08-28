@@ -1,5 +1,5 @@
 package ballgame.client;
 
 public class viddef {
-    public int width, height;
+    public int x, y, width, height, mode;
 }
