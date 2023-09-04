@@ -1,11 +1,15 @@
 package ballgame.game;
+import ballgame.engine.Scene;
 import ballgame.engine.adapter;
+import ballgame.engine.graph.Mesh;
+import ballgame.engine.graph.Render;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
+import java.util.Random;
 
 import static ballgame.Globals.viddefs;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -19,7 +23,8 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class shell extends adapter {
 
     public long window;
-
+    private Render render;
+    private Scene scene;
     @Override
     public void init() {
         super.init();
@@ -69,7 +74,7 @@ public class shell extends adapter {
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
         // Enable v-sync
-        glfwSwapInterval(1);
+//        glfwSwapInterval(1);
 
         // Make the window visible
         glfwShowWindow(window);
@@ -82,10 +87,23 @@ public class shell extends adapter {
 
         // Set the clear color
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+        render = new Render();
+        scene = new Scene();
+
+        float[] positions = new float[]{
+                0.0f, 0.5f, 0.0f,
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f
+        };
+        Mesh mesh = new Mesh(positions, 3);
+        scene.addMesh("triangle", mesh);
     }
 
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+        glViewport(0, 0,1280, 720);
+        render.render(scene);
 
         glfwSwapBuffers(window); // swap the color buffers
 
