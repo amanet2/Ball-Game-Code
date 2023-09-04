@@ -1,7 +1,9 @@
-package ballgame.game;
+package ballgame.engine;
 
 public interface logic {
     void init();
+
+    void loop();
 
     void input();
 

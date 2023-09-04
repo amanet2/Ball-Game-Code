@@ -1,5 +1,4 @@
-package ballgame.game;
-import ballgame.engine.session;
+package ballgame.engine;
 
 public class adapter implements logic {
     private int ticks;
@@ -45,6 +44,10 @@ public class adapter implements logic {
             tickReport = ticks;
             ticks = 0;
         }
+    }
+
+    public void loop() {
+
     }
 
     @Override

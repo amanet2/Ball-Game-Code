@@ -1,8 +1,5 @@
 package ballgame.engine;
 
-import ballgame.game.logic;
-import ballgame.game.adapter;
-
 public class session extends Thread implements Runnable {
     private final logic gameLogic;
     private final int tickRate;
