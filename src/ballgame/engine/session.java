@@ -1,5 +1,9 @@
 package ballgame.engine;
 
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+
+import ballgame.game.shell;
+
 public class session extends Thread implements Runnable {
     private final logic gameLogic;
     private final int tickRate;
@@ -19,7 +23,7 @@ public class session extends Thread implements Runnable {
             long snapshotTimeNanos = System.nanoTime();
             long tickTimeNanos = snapshotTimeNanos;
             gameLogic.init();
-            while (playing) {
+            while (!glfwWindowShouldClose(((shell) gameLogic).window)) {
                 snapshotTimeNanos = System.nanoTime();
                 gameLogic.input();
                 while(tickTimeNanos < snapshotTimeNanos) {

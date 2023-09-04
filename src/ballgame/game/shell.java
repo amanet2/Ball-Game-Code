@@ -92,12 +92,22 @@ public class shell extends adapter {
         scene = new Scene();
 
         float[] positions = new float[]{
-                0.0f, 0.5f, 0.0f,
+                -0.5f, 0.5f, 0.0f,
                 -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f
+                0.5f, -0.5f, 0.0f,
+                0.5f, 0.5f, 0.0f,
         };
-        Mesh mesh = new Mesh(positions, 3);
-        scene.addMesh("triangle", mesh);
+        float[] colors = new float[]{
+                0.5f, 0.0f, 0.0f,
+                0.0f, 0.5f, 0.0f,
+                0.0f, 0.0f, 0.5f,
+                0.0f, 0.5f, 0.5f,
+        };
+        int[] indices = new int[]{
+                0, 1, 3, 3, 1, 2,
+        };
+        Mesh mesh = new Mesh(positions, colors, indices);
+        scene.addMesh("quad", mesh);
     }
 
     public void render() {
