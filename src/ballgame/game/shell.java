@@ -3,6 +3,8 @@ import ballgame.engine.Scene;
 import ballgame.engine.adapter;
 import ballgame.engine.graph.Mesh;
 import ballgame.engine.graph.Render;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -92,10 +94,10 @@ public class shell extends adapter {
         scene = new Scene();
 
         float[] positions = new float[]{
-                -0.5f, 0.5f, 0.0f,
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
-                0.5f, 0.5f, 0.0f,
+                -0.5f,  0.5f, -1.0f,
+                -0.5f, -0.5f, -1.0f,
+                0.5f, -0.5f, -1.0f,
+                0.5f,  0.5f, -1.0f,
         };
         float[] colors = new float[]{
                 0.5f, 0.0f, 0.0f,
