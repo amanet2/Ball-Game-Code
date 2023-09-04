@@ -1,8 +1,12 @@
 package ballgame.game;
+import ballgame.engine.Entity;
 import ballgame.engine.Scene;
 import ballgame.engine.adapter;
 import ballgame.engine.graph.Mesh;
+import ballgame.engine.graph.Model;
 import ballgame.engine.graph.Render;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -11,6 +15,8 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static ballgame.Globals.viddefs;
@@ -27,6 +33,12 @@ public class shell extends adapter {
     public long window;
     private Render render;
     private Scene scene;
+
+    private Entity cubeEntity;
+    private Vector4f displInc = new Vector4f();
+    private float rotation;
+    long delay = 0;
+
     @Override
     public void init() {
         super.init();
@@ -94,22 +106,102 @@ public class shell extends adapter {
         scene = new Scene();
 
         float[] positions = new float[]{
-                -0.5f,  0.5f, -1.0f,
-                -0.5f, -0.5f, -1.0f,
-                0.5f, -0.5f, -1.0f,
-                0.5f,  0.5f, -1.0f,
+                // VO
+                -0.5f, 0.5f, 0.5f,
+                // V1
+                -0.5f, -0.5f, 0.5f,
+                // V2
+                0.5f, -0.5f, 0.5f,
+                // V3
+                0.5f, 0.5f, 0.5f,
+                // V4
+                -0.5f, 0.5f, -0.5f,
+                // V5
+                0.5f, 0.5f, -0.5f,
+                // V6
+                -0.5f, -0.5f, -0.5f,
+                // V7
+                0.5f, -0.5f, -0.5f,
         };
         float[] colors = new float[]{
                 0.5f, 0.0f, 0.0f,
                 0.0f, 0.5f, 0.0f,
                 0.0f, 0.0f, 0.5f,
                 0.0f, 0.5f, 0.5f,
+                0.5f, 0.0f, 0.0f,
+                0.0f, 0.5f, 0.0f,
+                0.0f, 0.0f, 0.5f,
+                0.0f, 0.5f, 0.5f,
         };
         int[] indices = new int[]{
+                // Front face
                 0, 1, 3, 3, 1, 2,
+                // Top Face
+                4, 0, 3, 5, 4, 3,
+                // Right face
+                3, 2, 7, 5, 3, 7,
+                // Left face
+                6, 1, 0, 6, 0, 4,
+                // Bottom face
+                2, 1, 6, 2, 6, 7,
+                // Back face
+                7, 6, 4, 7, 4, 5,
         };
+        List<Mesh> meshList = new ArrayList<>();
         Mesh mesh = new Mesh(positions, colors, indices);
-        scene.addMesh("quad", mesh);
+        meshList.add(mesh);
+        String cubeModelId = "cube-model";
+        Model model = new Model(cubeModelId, meshList);
+        scene.addModel(model);
+
+        cubeEntity = new Entity("cube-entity", cubeModelId);
+        cubeEntity.setPosition(0, 0, -2);
+        scene.addEntity(cubeEntity);
+    }
+
+    public void input() {
+        glfwPollEvents();
+
+        displInc.zero();
+
+        if(delay < System.currentTimeMillis()) {
+            if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+                displInc.y = 1;
+            } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+                displInc.y = -1;
+            }
+            if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+                displInc.x = -1;
+            } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+                displInc.x = 1;
+            }
+            if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+                displInc.z = -1;
+            } else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+                displInc.z = 1;
+            }
+            if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+                displInc.w = -1;
+            } else if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+                displInc.w = 1;
+            }
+            delay = System.currentTimeMillis() + 200;
+        }
+
+        Vector3f entityPos = cubeEntity.getPosition();
+        cubeEntity.setPosition(displInc.x + entityPos.x, displInc.y + entityPos.y, displInc.z + entityPos.z);
+        cubeEntity.setScale(cubeEntity.getScale() + displInc.w);
+        cubeEntity.updateModelMatrix();
+    }
+
+    public void update() {
+        super.update();
+        rotation += 1.5;
+        if (rotation > 360) {
+            rotation = 0;
+        }
+        cubeEntity.setRotation(1, 1, 1, (float) Math.toRadians(rotation));
+        cubeEntity.updateModelMatrix();
     }
 
     public void render() {
@@ -121,7 +213,7 @@ public class shell extends adapter {
 
         // Poll for window events. The key callback above will only be
         // invoked during this call.
-        glfwPollEvents();
+//        glfwPollEvents();
     }
 
     public void cleanup() {
