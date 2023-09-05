@@ -23,7 +23,7 @@ public class session extends Thread implements Runnable {
             long snapshotTimeNanos = System.nanoTime();
             long tickTimeNanos = snapshotTimeNanos;
             gameLogic.init();
-            while (!glfwWindowShouldClose(((shell) gameLogic).window)) {
+            while (!gameLogic.shouldClose()) {
                 snapshotTimeNanos = System.nanoTime();
                 gameLogic.input();
                 while(tickTimeNanos < snapshotTimeNanos) {

@@ -14,4 +14,6 @@ public interface logic {
     void cleanup();
 
     void disconnect();
+
+    boolean shouldClose();
 }

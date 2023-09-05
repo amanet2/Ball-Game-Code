@@ -16,6 +16,10 @@ public class adapter implements logic {
         tickReport = 0;
     }
 
+    public boolean shouldClose() {
+        return false;
+    }
+
     public int getTickReport() {
         return tickReport;
     }

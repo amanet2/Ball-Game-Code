@@ -39,6 +39,10 @@ public class shell extends adapter {
     private float rotation;
     long delay = 0;
 
+    public boolean shouldClose() {
+        return glfwWindowShouldClose(window);
+    }
+
     @Override
     public void init() {
         super.init();
