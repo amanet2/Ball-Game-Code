@@ -8,8 +8,8 @@ public class BallGame {
 
         viddefs.x = 0;
         viddefs.y = 0;
-        viddefs.width = 1280;
-        viddefs.height = 720;
+        viddefs.width = 1920;
+        viddefs.height = 1080;
 
         new session(new shell(), 60);
     }

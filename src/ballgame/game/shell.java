@@ -164,28 +164,25 @@ public class shell extends adapter {
 
         displInc.zero();
 
-        if(delay < System.currentTimeMillis()) {
-            if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-                displInc.y = 1;
-            } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-                displInc.y = -1;
-            }
-            if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-                displInc.x = -1;
-            } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-                displInc.x = 1;
-            }
-            if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-                displInc.z = -1;
-            } else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-                displInc.z = 1;
-            }
-            if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
-                displInc.w = -1;
-            } else if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
-                displInc.w = 1;
-            }
-            delay = System.currentTimeMillis() + 200;
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+            displInc.y = 1;
+        } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+            displInc.y = -1;
+        }
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+            displInc.x = -1;
+        } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+            displInc.x = 1;
+        }
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+            displInc.z = -1;
+        } else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+            displInc.z = 1;
+        }
+        if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+            displInc.w = -1;
+        } else if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+            displInc.w = 1;
         }
 
         Vector3f entityPos = cubeEntity.getPosition();
@@ -206,7 +203,7 @@ public class shell extends adapter {
 
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-        glViewport(0, 0,1280, 720);
+        glViewport(0, 0,viddefs.width, viddefs.height);
         render.render(scene);
 
         glfwSwapBuffers(window); // swap the color buffers

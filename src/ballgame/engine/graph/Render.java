@@ -3,6 +3,7 @@ package ballgame.engine.graph;
 import org.lwjgl.opengl.GL;
 import ballgame.engine.Scene;
 
+import static ballgame.Globals.viddefs;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Render {
@@ -21,7 +22,7 @@ public class Render {
 
     public void render(Scene scene) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glViewport(0, 0, 1280, 720);
+        glViewport(0, 0, viddefs.width, viddefs.height);
 
         sceneRender.render(scene);
     }

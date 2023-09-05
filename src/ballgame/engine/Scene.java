@@ -1,7 +1,7 @@
 package ballgame.engine;
 
 import ballgame.engine.graph.Model;
-import ballgame.engine.Entity;
+import static ballgame.Globals.viddefs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class Scene {
 
     public Scene() {
         modelMap = new HashMap<>();
-        projection = new Projection(1280, 720);
+        projection = new Projection(viddefs.width, viddefs.height);
     }
 
     public void addEntity(Entity entity) {
