@@ -7,8 +7,6 @@ import ballgame.engine.graph.Model;
 import ballgame.engine.graph.Render;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -17,7 +15,6 @@ import org.lwjgl.system.MemoryStack;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static ballgame.Globals.viddefs;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -35,6 +32,8 @@ public class shell extends adapter {
     private Scene scene;
 
     private Entity cubeEntity;
+    private Entity cubeEntity2;
+    private Entity squareEntity;
     private Vector4f displInc = new Vector4f();
     private float rotation;
     long delay = 0;
@@ -161,6 +160,38 @@ public class shell extends adapter {
         cubeEntity = new Entity("cube-entity", cubeModelId);
         cubeEntity.setPosition(0, 0, -2);
         scene.addEntity(cubeEntity);
+
+        //2nd cube
+        cubeEntity2 = new Entity("cube-entity2", cubeModelId);
+        cubeEntity2.setPosition(-2,0,-2);
+        scene.addEntity(cubeEntity2);
+
+        //plain 2D square
+        float[] positions2 = new float[]{
+                -0.5f, 0.5f, 0.0f,
+                -0.5f, -0.25f, 0.0f,
+                0.5f, -0.25f, 0.0f,
+                0.5f, 0.5f, 0.0f,
+        };
+        float[] colors2 = new float[]{
+                0.5f, 0.0f, 0.0f,
+                0.0f, 0.5f, 0.0f,
+                0.0f, 0.0f, 0.5f,
+                0.0f, 0.5f, 0.5f,
+        };
+        int[] indices2 = new int[]{
+                0, 1, 3, 3, 1, 2,
+        };
+        Mesh mesh2 = new Mesh(positions2, colors2, indices2);
+        String squareModelId = "square-model";
+        List<Mesh> meshList2 = new ArrayList<>();
+        meshList2.add(mesh2);
+        Model model2 = new Model(squareModelId, meshList2);
+        scene.addModel(model2);
+
+        squareEntity = new Entity("square-entity", squareModelId);
+        squareEntity.setPosition(2, 0, -4);
+        scene.addEntity(squareEntity);
     }
 
     public void input() {
@@ -203,6 +234,8 @@ public class shell extends adapter {
         }
         cubeEntity.setRotation(1, 1, 1, (float) Math.toRadians(rotation));
         cubeEntity.updateModelMatrix();
+        cubeEntity2.updateModelMatrix();
+        squareEntity.updateModelMatrix();
     }
 
     public void render() {

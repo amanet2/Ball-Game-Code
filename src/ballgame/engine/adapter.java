@@ -47,6 +47,7 @@ public class adapter implements logic {
             nextsecondnanos = theTime + 1000000000;
             tickReport = ticks;
             ticks = 0;
+            System.out.println(parentSession.getName() + ": " + tickReport + "hz");
         }
     }
 

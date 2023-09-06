@@ -1,9 +1,5 @@
 package ballgame.engine;
 
-import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
-
-import ballgame.game.shell;
-
 public class session extends Thread implements Runnable {
     private final logic gameLogic;
     private final int tickRate;
