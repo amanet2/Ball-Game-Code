@@ -223,7 +223,7 @@ public class shell extends adapter {
         Vector3f entityPos = cubeEntity.getPosition();
         cubeEntity.setPosition(displInc.x + entityPos.x, displInc.y + entityPos.y, displInc.z + entityPos.z);
         cubeEntity.setScale(cubeEntity.getScale() + displInc.w);
-        cubeEntity.updateModelMatrix();
+//        cubeEntity.updateModelMatrix();
     }
 
     public void update() {
