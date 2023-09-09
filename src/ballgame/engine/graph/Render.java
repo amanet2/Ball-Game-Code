@@ -1,7 +1,7 @@
 package ballgame.engine.graph;
 
 import org.lwjgl.opengl.GL;
-import ballgame.engine.Scene;
+import ballgame.engine.scene.Scene;
 
 import static ballgame.Globals.viddefs;
 import static org.lwjgl.opengl.GL11.*;

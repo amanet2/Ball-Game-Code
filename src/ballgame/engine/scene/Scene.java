@@ -1,6 +1,8 @@
-package ballgame.engine;
+package ballgame.engine.scene;
 
 import ballgame.engine.graph.Model;
+import ballgame.engine.graph.TextureCache;
+
 import static ballgame.Globals.viddefs;
 
 import java.util.HashMap;
@@ -9,10 +11,12 @@ import java.util.Map;
 public class Scene {
     private Map<String, Model> modelMap;
     private Projection projection;
+    private TextureCache textureCache;
 
     public Scene() {
         modelMap = new HashMap<>();
         projection = new Projection(viddefs.width, viddefs.height);
+        textureCache = new TextureCache();
     }
 
     public void addEntity(Entity entity) {
@@ -39,6 +43,10 @@ public class Scene {
     public Projection getProjection() {
         return projection;
     }
+
+    public TextureCache getTextureCache() {
+        return textureCache;
+    };
 
     public void resize(int width, int height) {
         projection.updateProjMatrix(width, height);

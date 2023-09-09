@@ -1,10 +1,6 @@
 package ballgame.engine.graph;
 
-import ballgame.engine.Entity;
-import ballgame.engine.Scene;
-import ballgame.engine.graph.Model;
-import ballgame.engine.graph.ShaderProgram;
-import ballgame.engine.graph.UniformsMap;
+import ballgame.engine.scene.*;
 
 import java.util.*;
 
@@ -31,6 +27,7 @@ public class SceneRender {
         uniformsMap = new UniformsMap(shaderProgram.getProgramId());
         uniformsMap.createUniform("projectionMatrix");
         uniformsMap.createUniform("modelMatrix");
+        uniformsMap.createUniform("txtSampler");
     }
 
     public void render(Scene scene) {
@@ -38,16 +35,26 @@ public class SceneRender {
 
         uniformsMap.setUniform("projectionMatrix", scene.getProjection().getProjMatrix());
 
+        uniformsMap.setUniform("txtSampler", 0);
+
         Collection<Model> models = scene.getModelMap().values();
+        TextureCache textureCache = scene.getTextureCache();
         for (Model model : models) {
-            model.getMeshList().stream().forEach(mesh -> {
-                glBindVertexArray(mesh.getVaoId());
-                List<Entity> entities = model.getEntitiesList();
-                for (Entity entity : entities) {
-                    uniformsMap.setUniform("modelMatrix", entity.getModelMatrix());
-                    glDrawElements(GL_TRIANGLES, mesh.getNumVertices(), GL_UNSIGNED_INT, 0);
+            List<Entity> entities = model.getEntitiesList();
+
+            for (Material material : model.getMaterialList()) {
+                Texture texture = textureCache.getTexture(material.getTexturePath());
+                glActiveTexture(GL_TEXTURE0);
+                texture.bind();
+
+                for (Mesh mesh : material.getMeshList()) {
+                    glBindVertexArray(mesh.getVaoId());
+                    for (Entity entity : entities) {
+                        uniformsMap.setUniform("modelMatrix", entity.getModelMatrix());
+                        glDrawElements(GL_TRIANGLES, mesh.getNumVertices(), GL_UNSIGNED_INT, 0);
+                    }
                 }
-            });
+            }
         }
 
         glBindVertexArray(0);

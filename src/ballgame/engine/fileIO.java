@@ -3,9 +3,9 @@ package ballgame.engine;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class Utils {
+public class fileIO {
 
-    private Utils() {
+    private fileIO() {
         // Utility class
     }
 

@@ -1,4 +1,4 @@
-package ballgame.engine;
+package ballgame.engine.scene;
 
 import org.joml.*;
 

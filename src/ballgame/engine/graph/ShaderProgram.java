@@ -1,7 +1,7 @@
 package ballgame.engine.graph;
 
 import org.lwjgl.opengl.GL30;
-import ballgame.engine.Utils;
+import ballgame.engine.fileIO;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ public class ShaderProgram {
         }
 
         List<Integer> shaderModules = new ArrayList<>();
-        shaderModuleDataList.forEach(s -> shaderModules.add(createShader(Utils.readFile(s.shaderFile), s.shaderType)));
+        shaderModuleDataList.forEach(s -> shaderModules.add(createShader(fileIO.readFile(s.shaderFile), s.shaderType)));
 
         link(shaderModules);
     }
